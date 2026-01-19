@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+void Initialize();
+void GetInput();
+void Update();
+void Render();
+void ShutDown();
+
 int main()
 {
     std::cout << "Nowa zmiana!\n";
