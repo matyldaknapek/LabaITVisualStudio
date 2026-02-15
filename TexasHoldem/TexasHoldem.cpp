@@ -31,8 +31,47 @@ card deck[MAX], temp;
 bool IS_GAME_FINISHED = 0;
 
 int top = 0;
-card deckPlayer_1[2];
-card deckPlayer_2[2];
+//klasa gracza
+class Player {
+public:
+	string name;
+	card hand[2];
+	int cardsInHand;
+
+	Player(string n = "Player") {
+		name = n;
+		cardsInHand = 0;
+	}
+
+	void resetHand() {
+		cardsInHand = 0;
+	}
+
+	void takeCard(card c) {
+		if (cardsInHand < 2) {
+			hand[cardsInHand] = c;
+			cardsInHand++;
+		}
+	}
+
+	void printHand() {
+		cout << name << " hand: ";
+		for (int i = 0; i < cardsInHand; i++) {
+			hand[i].printcard();
+			if (i < cardsInHand - 1) cout << ", ";
+		}
+		cout << endl;
+	}
+};
+//card deckPlayer_1[2];
+//card deckPlayer_2[2];
+Player player1("Player 1");
+Player player2("Player 2");
+card flop1;
+card flop2;
+card flop3;
+card turn;
+card river;
 
 card DrawCard()
 {
@@ -45,7 +84,7 @@ card DrawCard()
 int main()
 {
 	Initialize(); //Budowa talii, tasowanie
-	GetInput();
+//	GetInput();
 
 	while (!IS_GAME_FINISHED)
 	{
@@ -84,10 +123,39 @@ void Initialize()
 
 	//Dobieranie kart
 	top = 0;
-	deckPlayer_1[0] = DrawCard();
-	deckPlayer_2[0] = DrawCard();
-	deckPlayer_1[1] = DrawCard();
-	deckPlayer_2[1] = DrawCard();
+
+	player1.resetHand();
+	player2.resetHand();
+
+	player1.takeCard(DrawCard());
+	player2.takeCard(DrawCard());
+	player1.takeCard(DrawCard());
+	player2.takeCard(DrawCard());
+	
+	//Zwracam co dostali
+	player1.printHand();
+	player2.printHand();
+
+
+	flop1 = DrawCard();
+	flop2 = DrawCard();
+	flop3 = DrawCard();
+	turn = DrawCard();
+	river = DrawCard();
+
+	//wyświetlam stos
+
+	cout << "Flop: ";
+	flop1.printcard(); cout << ", ";
+	flop2.printcard(); cout << ", ";
+	flop3.printcard(); cout << endl;
+
+	cout << "Turn: ";
+	turn.printcard(); cout << endl;
+
+	cout << "River: ";
+	river.printcard(); cout << endl;
+
 }
 //Zwracanie Talii 
 void TheDeck()
@@ -132,7 +200,7 @@ void shuffle()
 		deck[m] = temp;
 	}
 }
-void Update() 
+void Update()
 {
 
 }
@@ -142,8 +210,3 @@ void Render()
 void Shutdown() 
 {
 }
-
-
-
-
-
