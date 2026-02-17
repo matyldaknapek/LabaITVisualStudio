@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="TexasHoldem.vcxproj" />
+  <Project Path="TexasHoldem.vcxproj" Id="e7bcc610-e82d-4f5a-8d59-d16d0bfec419" />
 </Solution>
